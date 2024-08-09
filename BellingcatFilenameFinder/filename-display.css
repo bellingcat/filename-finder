@@ -1,0 +1,17 @@
+/* Custom styling for the filename display */
+
+.custom-filename-div {
+    font-size: 12px;
+    color: white;
+    background-color: black;
+    margin: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    position: absolute;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    top: 0;
+}
