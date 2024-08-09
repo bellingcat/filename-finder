@@ -5,8 +5,7 @@
   "description": "Display filenames for images uploaded to Google by users (in maps, reviews, etc)",
   "permissions": [
     "declarativeNetRequest",
-    "declarativeNetRequestWithHostAccess",
-    "host_permissions"
+    "declarativeNetRequestWithHostAccess"
   ],
   "icons": {
     "16": "icons/PictureIcon16.png",
