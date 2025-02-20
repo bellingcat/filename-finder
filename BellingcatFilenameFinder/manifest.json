@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "Bellingcat Filename Finder",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Display filenames for images uploaded to Google Maps by users (in location photos, reviews, etc)",
-  "permissions": ["declarativeNetRequest"],
+  "permissions": ["declarativeNetRequest", "webRequest"],
   "icons": {
     "16": "icons/PictureIcon16.png",
     "32": "icons/PictureIcon32.png",
