@@ -1,5 +1,8 @@
 // image-namer.js
 
+var postDataUrls = [];
+var postData = "";
+
 // Fetch and extract the title from the image headers
 async function fetchImageTitle(url) {
   try {
@@ -20,6 +23,26 @@ async function fetchImageTitle(url) {
     console.error("Failed to fetch image filename:", error);
   }
   return "error";
+}
+
+function findSourceImage(url) {
+
+  if (postData === "") {
+    return null;
+  }
+
+  // Remove any parameters from the URL
+  const cleanURL = url.split("=", 1)[0]
+
+  const matchIndex = postData.indexOf(cleanURL);
+  if (matchIndex === -1) {
+    return null;
+  }
+
+  const matchingData = postData.substring(0, matchIndex);
+  const imageID = matchingData.match(/.*(AF1Qip[^"]+)"/)[1];
+
+  return "https://lh5.googleusercontent.com/p/" + imageID;
 }
 
 // Function to process elements with the matching background-image pattern
@@ -67,3 +90,25 @@ function debounce(func, wait) {
 // Run the extension when the DOM changes with a 1s debounce
 const observer = new MutationObserver(debounce(processElements, 1000));
 observer.observe(document.body, { childList: true, subtree: true });
+
+function loadPostData(message) {
+  if (message.action === "loadPostData") {
+    if (postDataUrls.includes(message.url)) {
+      return;
+    }
+    else {
+      postDataUrls.push(message.url);
+      fetch(message.url)
+        .then((response) => {
+          return response.text();
+        })
+        .then((text) => {
+          // remove newlines and carriage returns
+          postData = postData.concat(text.replace(/[\r\n]+/gm, ""));
+          processElements();
+        });
+    }
+  }
+}
+
+chrome.runtime.onMessage.addListener(loadPostData);
