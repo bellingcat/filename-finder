@@ -50,10 +50,8 @@ function processElements() {
   const backgroundImageElements = document.querySelectorAll(
     `[style*="background-image"]`
   ); // Select elements with the matching style
-  const googleusercontentPattern =
-    /background-image:\s*url\("https:\/\/.*\.googleusercontent\.com\/p\/.*"\);/;
   const googleusercontentURLPattern =
-    /url\("(https:\/\/.*\.googleusercontent\.com\/p\/.*)"\)/;
+    /background-image:\s*url\("(https:\/\/.*\.googleusercontent\.com\/(p|geougc-cs)\/.*)"\)/;
   const newDivClass = "custom-filename-div";
 
   backgroundImageElements.forEach(async (imageElement) => {
@@ -62,7 +60,7 @@ function processElements() {
     if (
       !imageElement.querySelector("." + newDivClass) &&
       style &&
-      googleusercontentPattern.test(style)
+      googleusercontentURLPattern.test(style)
     ) {
       const urlMatch = style.match(googleusercontentURLPattern);
       if (urlMatch && urlMatch[1]) {
