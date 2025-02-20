@@ -64,7 +64,15 @@ function processElements() {
     ) {
       const urlMatch = style.match(googleusercontentURLPattern);
       if (urlMatch && urlMatch[1]) {
-        const imageUrl = urlMatch[1];
+        var imageUrl = urlMatch[1];
+        const userContentEndpoint = urlMatch[2];
+
+        if (userContentEndpoint !== "p") {
+          imageUrl = findSourceImage(imageUrl);
+
+          if (imageUrl === null) return;
+        }
+
         const imageTitle = await fetchImageTitle(imageUrl);
         const titleDiv = document.createElement("div");
         titleDiv.textContent = imageTitle;
