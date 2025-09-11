@@ -201,8 +201,15 @@
     "https://www.google.co.zw/maps/*",
     "https://www.google.cat/maps/*"
   ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "filename-finder@bellingcat.com",
+      "strict_min_version": "109.0"
+    }
+  },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "scripts": ["background.js"]
   },
   "content_scripts": [
     {
