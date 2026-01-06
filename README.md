@@ -1,5 +1,9 @@
 # filename-finder
 
+> [!IMPORTANT]  
+> This extension has been deprecated because of an internal API change by Google, which means that the original filenames of images are no longer available.
+
+
 A web extension that displays filenames for images uploaded to Google by users (in maps, reviews, etc).
 
 Its major parts are:
